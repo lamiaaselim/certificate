@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <title>>توزيع الشهادات</title>
+</head>
+<body>
+  <div class="container">
+    <h1>توزيع الشهادات</h1>
+    <form>
+      <label for="idInput">أدخل رقم الهوية:</label>
+      <input type="text" id="idInput" name="idInput" required>
+      <button type="button" onclick="getCertificate()">احصل على الشهادة</button>
+      <button type="button" onclick="printCertificate()">اطبع الشهادة</button>
+    </form>
+    <div id="certificateContainer"></div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
