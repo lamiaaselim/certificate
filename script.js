@@ -4,7 +4,7 @@ function getCertificate() {
 
   var id = idInput.value;
 
-  // قم بقراءة ملف JSON والتحقق من تطابق رقم الهوية
+  // قراءة ملف JSON والتحقق من تطابق رقم الهوية
   fetch("certificates.json")
     .then(response => response.json())
     .then(data => {
@@ -14,8 +14,8 @@ function getCertificate() {
         // عرض التفاصيل في عنصر العرض
         var certificateHTML = "<h2>شهادة تقدير</h2>";
         certificateHTML += "<p>اسم المستلم: " + certificate.name + "</p>";
-        certificateHTML += "<p>تاريخ الاصدار: " + certificate.date + "</p>";
-        // قم بإضافة المزيد من التفاصيل حسب احتياجاتك
+        certificateHTML += "<p>تاريخ الإصدار: " + certificate.date + "</p>";
+        // أضف المزيد من التفاصيل حسب الحاجة
 
         certificateContainer.innerHTML = certificateHTML;
       } else {
@@ -29,23 +29,29 @@ function getCertificate() {
 }
 
 function printCertificate() {
-  // طباعة الشهادة بمقاس A4
-  window.print();
+  var certificateContainer = document.getElementById("certificateContainer").innerHTML;
+
+  var printWindow = window.open("", "_blank");
+  printWindow.document.open();
+  printWindow.document.write('<html><head><title>الشهادة</title></head><body>');
+  printWindow.document.write(certificateContainer);
+  printWindow.document.write('</body></html>');
+  printWindow.document.close();
+  printWindow.print();
 }
 
 function downloadCertificate() {
-  var certificateContainer = document.getElementById("certificateContainer");
-  var certificateHTML = certificateContainer.innerHTML;
+  var certificateContainer = document.getElementById("certificateContainer").innerHTML;
 
-  // إنشاء ملف بصيغة صورة أو PDF
-  var fileContent = "<html><head><title>شهادة تقدير</title></head><body>" + certificateHTML + "</body></html>";
+  var fileContent = '<html><head><title>الشهادة</title></head><body>';
+  fileContent += certificateContainer;
+  fileContent += '</body></html>';
 
-  // تنزيل الملف
-  var blob = new Blob([fileContent], { type: "text/html" });
+  var blob = new Blob([fileContent], { type: 'text/html' });
   var url = URL.createObjectURL(blob);
 
-  var downloadLink = document.createElement("a");
+  var downloadLink = document.createElement('a');
   downloadLink.href = url;
-  downloadLink.download = "certificate.html"; // اسم الملف وامتداده
+  downloadLink.download = 'certificate.html';
   downloadLink.click();
 }
