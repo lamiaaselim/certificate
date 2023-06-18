@@ -34,8 +34,9 @@ function printCertificate() {
   var printWindow = window.open("", "_blank");
   printWindow.document.open();
   printWindow.document.write('<html><head><title>الشهادة</title></head><body>');
+  printWindow.document.write('<div style="width: 21cm; margin: 0 auto;">');
   printWindow.document.write(certificateContainer);
-  printWindow.document.write('</body></html>');
+  printWindow.document.write('</div></body></html>');
   printWindow.document.close();
   printWindow.print();
 }
@@ -44,8 +45,9 @@ function downloadCertificate() {
   var certificateContainer = document.getElementById("certificateContainer").innerHTML;
 
   var fileContent = '<html><head><title>الشهادة</title></head><body>';
+  fileContent += '<div style="width: 21cm; margin: 0 auto;">';
   fileContent += certificateContainer;
-  fileContent += '</body></html>';
+  fileContent += '</div></body></html>';
 
   var blob = new Blob([fileContent], { type: 'text/html' });
   var url = URL.createObjectURL(blob);
